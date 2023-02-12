@@ -61,7 +61,7 @@ export default function Form() {
                     ))}
                 </select>
 
-                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.brand} name='model' onChange={e => handleChangeData(e)}>
+                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.model} name='model' onChange={e => handleChangeData(e)}>
                     <option value="">-- Modelo --</option>
 
                     {filtering.map(filtered => (

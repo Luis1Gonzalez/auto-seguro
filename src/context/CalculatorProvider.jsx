@@ -6,6 +6,7 @@ const CalculatorProvider = ({ children }) => {
 
     const [data, setData] = useState({
         brand: '',
+        model: '',
         year: '',
         type: ''
     })
