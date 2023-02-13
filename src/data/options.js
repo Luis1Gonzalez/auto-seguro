@@ -71,14 +71,14 @@ export { cars };
 // =========================
 
 const yearMax = new Date().getFullYear();
-export const years = Array.from(
+const years = Array.from(
     new Array(20),
     (valor, index) => yearMax - index
 );
-export { yearMax }
+export { years }
 // ==========================
 
-export const type = [
+const type = [
   {id: 1, mode: 'Todo riesgo'},
   {id: 2, mode: 'Todo riesgo con franquicia 150'},
   {id: 3, mode: 'Todo riesgo con franquicia 300'},
@@ -86,3 +86,13 @@ export const type = [
   {id: 5, mode: 'Daños a terceros, lunas y ruedas'},
   {id: 6, mode: 'Responsabilidad civil'},
 ]
+export { type }
+
+// ===========================
+
+const timeContract = [
+  {id:1, time: 1},
+  {id:2, time: 2},
+  {id:3, time: 3},
+]
+export { timeContract }

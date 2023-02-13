@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { brands, cars, years, type } from '../data/options'
+import { brands, cars, years, type, timeContract } from '../data/options'
 import useQuotation from '../hooks/useQuotation'
 
 export default function Form() {
 
-    const { data, handleChangeData } = useQuotation()
+    const { data, handleChangeData, CalculatedInsurance } = useQuotation()
     const [filtering, setFiltering] = useState([])
 
     const filtered = data.brand
@@ -14,8 +14,18 @@ export default function Form() {
         setFiltering(modelsFiltered)
     }, [data])
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (Object.values(data).includes('')) {
+            console.log('Todos los campos son obligatorios')
+            return
+        }
+        CalculatedInsurance()
+    }
+
+// console.log(timeContract)
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <h3 className='text-center py-2 text-2xl text-red-700'>Formulario</h3>
 
             <div className='border-b-2 mb-5'>
@@ -46,11 +56,15 @@ export default function Form() {
 
             </div>
 
+{/* =========================================================================== */}
+
             <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
                 <p className=' p-2'>Datos del Vehiculo</p>
 
-                <input type="text" placeholder='Matricula' className='px-3 rounded-md bg-gray-200 my-1 w-[100%]' />
-
+                <div className='flex items-center'>
+                    <p className='w-1/3'>Matricula:</p>
+                    <input type="text" placeholder='XJR-215' className='px-3 rounded-md bg-gray-200 w-1/3 text-center uppercase' />
+                </div>
                 <select className='px-3 rounded-md bg-gray-200 my-1' value={data.brand} name='brand' onChange={e => handleChangeData(e)}>
                     <option value="">-- Marca --</option>
 
@@ -89,18 +103,21 @@ export default function Form() {
                 <select className='px-3 rounded-md bg-gray-200 my-1 w-[100%]' value={data.type} name='type' onChange={e => handleChangeData(e)}>
                     <option value="">-- Cobertura --</option>
 
-                    {type.map(t => (
-                        <option key={t.id} value={t.mode}>
-                            {t.mode}
+                    {type.map(typ => (
+                        <option key={typ.id} value={typ.mode}>
+                            {typ.mode}
                         </option>
                     ))}
                 </select>
-                
-                <select name="" id="driverNumber" className='px-1 rounded-md bg-gray-200 mt-1 mb-3'>
-                    <option value="0">-- Extención --</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+
+                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.time} name='time' onChange={e => handleChangeData(e)}>
+                    <option value="">-- Extención --</option>
+                    {timeContract.map(time => (
+                        <option key={time.id} value={time.time}>
+                            {time.time}
+                        </option>
+                    ))}
+
                 </select>
 
             </div>
