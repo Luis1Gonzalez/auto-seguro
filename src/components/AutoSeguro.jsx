@@ -1,4 +1,5 @@
 import Form from "./Form"
+import Modal from "./Modal"
 
 
 export default function AutoSeguro() {
@@ -10,6 +11,7 @@ export default function AutoSeguro() {
         </header>
         <main className='bg-white md:w-2/3 lg:w-2/4 mx-auto shadow rounded-lg p-6'>
             <Form />
+            <Modal />
         </main>
         </>
     )

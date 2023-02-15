@@ -96,3 +96,17 @@ const timeContract = [
   {id:3, time: 3},
 ]
 export { timeContract }
+
+const driverQuantity = [
+  {id: 1, drivers: 1},
+  {id: 2, drivers: 2},
+  {id: 3, drivers: 3},
+  {id: 4, drivers: 4},
+]
+export { driverQuantity }
+
+const countMinor = [
+  {id: 1, minors: 'No'},
+  {id: 2, minors: 'Si'}
+]
+export { countMinor }

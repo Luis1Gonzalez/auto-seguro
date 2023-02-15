@@ -7,41 +7,22 @@ export function calculateCoverage(type) {
 
   switch (type) {
     case "Todo riesgo":
-      increase = 1.5;
+      increase = 1.2;
       break;
     case "Todo riesgo con franquicia 150":
-      increase = 1.25;
+      increase = 1.16;
       break;
-    case "odo riesgo con franquicia 300":
-      increase = 1.2;
+    case "Todo riesgo con franquicia 300":
+      increase = 1.12;
       break;
     case "Daños a terceros":
-      increase = 1.15;
+      increase = 1.10;
       break;
     case "Daños a terceros, lunas y ruedas":
-      increase = 1.1;
+      increase = 1.08;
       break;
     case "Responsabilidad civil":
-      increase = 1.05;
-      break;
-    default:
-      break;
-  }
-  return increase;
-}
-
-export function calcularCoverageTime(time) {
-  let increase;
-
-  switch (time) {
-    case "1":
-      increase = 1.5;
-      break;
-    case "2":
-      increase = 1.3;
-      break;
-    case "3":
-      increase = 1.2;
+      increase = 1.06;
       break;
     default:
       break;
@@ -69,21 +50,38 @@ export function calculateOrigin(determinateOrigen) {
 }
 
 export function calculateTime(time) {
-  let timeCoverage;
+  let increase;
 
   switch (time) {
-    case "3":
-      timeCoverage = 1.1;
+    case "1":
+      increase = 0;
       break;
     case "2":
-      timeCoverage = 1.07;
+      increase = 1.1;
       break;
-    case "1":
-      timeCoverage = 1.05;
+    case "3":
+      increase = 1.20;
       break;
     default:
       break;
   }
-  return timeCoverage;
+  return increase;
+}
+
+export function calculateMinor(minor) {
+  let minorIs;
+
+  switch(minor) {
+    case "Si":
+    minorIs = 1.3;
+    break;
+    case "No":
+    minorIs = 0;
+    break;
+    default:
+      break;
+  }
+  return minorIs;
+  
 }
 

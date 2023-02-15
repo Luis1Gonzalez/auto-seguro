@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { brands, cars, years, type, timeContract } from '../data/options'
+import { brands, cars, years, type, timeContract, driverQuantity, countMinor } from '../data/options'
 import useQuotation from '../hooks/useQuotation'
 
 export default function Form() {
 
-    const { data, handleChangeData, CalculatedInsurance } = useQuotation()
+    const { data, handleChangeData, CalculatedInsurance, modal, setModal } = useQuotation()
     const [filtering, setFiltering] = useState([])
 
     const filtered = data.brand
@@ -21,9 +21,10 @@ export default function Form() {
             return
         }
         CalculatedInsurance()
+        setModal(true)
     }
 
-// console.log(timeContract)
+    console.log(modal)
     return (
         <form onSubmit={handleSubmit}>
             <h3 className='text-center py-2 text-2xl text-red-700'>Formulario</h3>
@@ -32,96 +33,103 @@ export default function Form() {
                 <p className='text-center p-2 text-gray-700'>Datos del Cliente</p>
 
                 <div className='flex flex-col items-center'>
-                    <input type="text" placeholder='Cliente' className='border-black   w-[100%] rounded-md my-1 px-3 bg-gray-200' />
-                    <input type="cel" pattern="[0-9]{9}" placeholder="Ingresa el telefono" className='border-black w-[100%] rounded-md my-1 px-3 bg-gray-200' />
+                    <input type="text" name='name' placeholder='Cliente' value={data.name} required className='border-black   w-[100%] rounded-md my-1 px-3 bg-gray-200' onChange={e => handleChangeData(e)} />
+                    <input type="tel" name='phone' required placeholder="Telefono" value={data.phone} className='border-black w-[100%] rounded-md my-1 px-3 bg-gray-200' onChange={e => handleChangeData(e)} />
+                    <input type="mail" name='email' size="30" required placeholder="Email" value={data.email} className='border-black w-[100%] rounded-md my-1 px-3 bg-gray-200' onChange={e => handleChangeData(e)} />
                 </div>
 
                 <div className='my-2 text-gray-700 flex items-center justify-around'>
                     <label htmlFor="driverNumber">Numero de Conductores:</label>
-                    <select name="" id="driverNumber" className='px-1 rounded-md bg-gray-200'>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
+                    <select name="drivers" id="driverNumber" className='px-1 rounded-md bg-gray-200 text-center' value={data.drivers} onChange={e => handleChangeData(e)}>
+                        {driverQuantity.map(driver => (
+                            <option className='text-red-500' key={driver.id} value={driver.drivers}>
+                                {driver.drivers}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
                 <div className='mt-2 mb-4 text-gray-700 flex items-center justify-around'>
                     <label htmlFor="driver25">Menores de 25 años:</label>
-                    <select name="" id="driver25" className='px-1 rounded-md bg-gray-200'>
-                        <option value="1">No</option>
-                        <option value="2">Si</option>
+                    <select name="minor" id="driver25" className='px-1 rounded-md bg-gray-200 text-center' value={data.minor} onChange={e => handleChangeData(e)}>
+                        {countMinor.map(menor => (
+                            <option className='text-red-500' key={menor.id} value={menor.minors}>
+                                {menor.minors}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
             </div>
 
-{/* =========================================================================== */}
+            {/* =========================================================================== */}
+            <div className='flex flex-col sm:flex-row'>
+                <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
+                    <p className=' p-2'>Datos del Vehiculo</p>
 
-            <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
-                <p className=' p-2'>Datos del Vehiculo</p>
+                    <div className='flex items-center'>
+                        <p className='w-1/3'>Matricula:</p>
+                        <input type="text" placeholder='XJR-215'  value={data.matricula} className='px-3 rounded-md bg-gray-200 w-1/3 text-center uppercase' name='matricula' onChange={e => handleChangeData(e)}/>
+                    </div>
+                    <select className='px-3 rounded-md bg-gray-200 my-1 text-center' value={data.brand} name='brand' onChange={e => handleChangeData(e)}>
+                        <option value="">-- Marca --</option>
 
-                <div className='flex items-center'>
-                    <p className='w-1/3'>Matricula:</p>
-                    <input type="text" placeholder='XJR-215' className='px-3 rounded-md bg-gray-200 w-1/3 text-center uppercase' />
+                        {brands.map(brand => (
+                            <option className='text-red-500' key={brand.id} value={brand.marca}>
+                                {brand.marca}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select className='px-3 rounded-md bg-gray-200 my-1 text-center' value={data.model} name='model' onChange={e => handleChangeData(e)}>
+                        <option value="">-- Modelo --</option>
+
+                        {filtering.map(filtered => (
+                            <option className='text-red-500' key={filtered.id} value={filtered.modelo}>
+                                {filtered.modelo}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select className='px-3 rounded-md bg-gray-200 my-1 mb-4 text-center' value={data.year} name='year' onChange={e => handleChangeData(e)}>
+                        <option value="">-- Año --</option>
+
+                        {years.map(year => (
+                            <option className='text-red-500' key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
+
                 </div>
-                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.brand} name='brand' onChange={e => handleChangeData(e)}>
-                    <option value="">-- Marca --</option>
 
-                    {brands.map(brand => (
-                        <option key={brand.id} value={brand.marca}>
-                            {brand.marca}
-                        </option>
-                    ))}
-                </select>
+                {/* =========================================================================== */}
 
-                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.model} name='model' onChange={e => handleChangeData(e)}>
-                    <option value="">-- Modelo --</option>
+                <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
+                    <p className=' p-2'>Datos de la Poliza</p>
 
-                    {filtering.map(filtered => (
-                        <option key={filtered.id} value={filtered.modelo}>
-                            {filtered.modelo}
-                        </option>
-                    ))}
-                </select>
+                    <select className='px-3 rounded-md bg-gray-200 my-1 w-[100%] text-center' value={data.type} name='type' onChange={e => handleChangeData(e)}>
+                        <option value="">-- Cobertura --</option>
 
-                <select className='px-3 rounded-md bg-gray-200 my-1 mb-4' value={data.year} name='year' onChange={e => handleChangeData(e)}>
-                    <option value="">-- Año --</option>
+                        {type.map(typ => (
+                            <option className='text-red-500' key={typ.id} value={typ.mode}>
+                                {typ.mode}
+                            </option>
+                        ))}
+                    </select>
 
-                    {years.map(year => (
-                        <option key={year} value={year}>
-                            {year}
-                        </option>
-                    ))}
-                </select>
+                    <select className='px-3 rounded-md bg-gray-200 my-1 text-center' value={data.time} name='time' onChange={e => handleChangeData(e)}>
+                        <option value="">-- Extención --</option>
+                        {timeContract.map(time => (
+                            <option className='text-red-500' key={time.id} value={time.time}>
+                                {time.time}
+                            </option>
+                        ))}
 
+                    </select>
+
+                </div>
             </div>
-
-            <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
-                <p className=' p-2'>Datos de la Poliza</p>
-
-                <select className='px-3 rounded-md bg-gray-200 my-1 w-[100%]' value={data.type} name='type' onChange={e => handleChangeData(e)}>
-                    <option value="">-- Cobertura --</option>
-
-                    {type.map(typ => (
-                        <option key={typ.id} value={typ.mode}>
-                            {typ.mode}
-                        </option>
-                    ))}
-                </select>
-
-                <select className='px-3 rounded-md bg-gray-200 my-1' value={data.time} name='time' onChange={e => handleChangeData(e)}>
-                    <option value="">-- Extención --</option>
-                    {timeContract.map(time => (
-                        <option key={time.id} value={time.time}>
-                            {time.time}
-                        </option>
-                    ))}
-
-                </select>
-
-            </div>
-
             <input type="submit" className='w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold' value='cotizar' />
 
         </form>

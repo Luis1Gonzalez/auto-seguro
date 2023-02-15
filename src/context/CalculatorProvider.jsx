@@ -1,5 +1,5 @@
 import { createContext, useState } from "react"
-import { yearDifference, calculateCoverage, calculateOrigin, calculateTime } from '../helpers/index'
+import { yearDifference, calculateCoverage, calculateOrigin, calculateTime, calculateMinor } from '../helpers/index'
 import { cars } from '../data/options'
 
 const CalculatorContext = createContext()
@@ -12,8 +12,16 @@ const CalculatorProvider = ({ children }) => {
         model: '',
         year: '',
         type: '',
-        time: ''
+        time: '',
+        drivers: '',
+        minor: '',
+        name: '',
+        email: '',
+        phone: '',
+        matricula: ''
     })
+
+    const [modal, setModal] = useState(false)
 
     const handleChangeData = (e) => {
         setData({
@@ -22,9 +30,11 @@ const CalculatorProvider = ({ children }) => {
         })
     }
 
+
+
 const CalculatedInsurance = () => {
 
-let basicPrice = 2000;
+let basicPrice = 1000;
 console.log(basicPrice)
 
 //Obtener cuantos años tiene el carro
@@ -50,6 +60,9 @@ console.log(basicPrice)
 basicPrice -= calculateTime(data.time)
 console.log(basicPrice)
 
+//Calculando incremento por conductor menor de 25años
+basicPrice *= calculateMinor(data.minor)
+console.log(basicPrice)
 
 }
 
@@ -61,7 +74,9 @@ console.log(data)
             value={{
                 data,
                 handleChangeData,
-                CalculatedInsurance
+                CalculatedInsurance,
+                modal,
+                setModal
             }}>
             {children}
         </CalculatorContext.Provider>
