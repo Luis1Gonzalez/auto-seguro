@@ -22,11 +22,11 @@ export default function Form() {
             return
         }
         CalculatedInsurance()
-        setModal(true)
         setError('')
+        setModal(true)
     }
 
-    console.log(modal)
+   
     return (
         <>
         {error && <Error />}
@@ -45,6 +45,7 @@ export default function Form() {
                 <div className='my-2 text-gray-700 flex items-center justify-around'>
                     <label htmlFor="driverNumber">Numero de Conductores:</label>
                     <select name="drivers" id="driverNumber" className='px-1 rounded-md bg-gray-200 text-center' value={data.drivers} onChange={e => handleChangeData(e)}>
+                    <option>?</option>
                         {driverQuantity.map(driver => (
                             <option className='text-red-500' key={driver.id} value={driver.drivers}>
                                 {driver.drivers}
@@ -56,6 +57,7 @@ export default function Form() {
                 <div className='mt-2 mb-4 text-gray-700 flex items-center justify-around'>
                     <label htmlFor="driver25">Menores de 25 años:</label>
                     <select name="minor" id="driver25" className='px-1 rounded-md bg-gray-200 text-center' value={data.minor} onChange={e => handleChangeData(e)}>
+                    <option>?</option>
                         {countMinor.map(menor => (
                             <option className='text-red-500' key={menor.id} value={menor.minors}>
                                 {menor.minors}
@@ -134,7 +136,7 @@ export default function Form() {
 
                 </div>
             </div>
-            <input type="submit" className='w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold' value='cotizar' />
+            <input type="submit" className='w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold mb-8' value='cotizar' />
 
         </form>
         </>

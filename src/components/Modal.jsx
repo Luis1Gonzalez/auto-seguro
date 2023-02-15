@@ -1,17 +1,24 @@
 import useQuotation from '../hooks/useQuotation'
-import CloseBtn from '../assets/cerrar.svg'
+import CloseBtn from '../assets/cerrar.png'
 import { formatCurrency } from '../helpers'
 
 export default function Modal() {
 
-    const { data, resultado } = useQuotation()
+    const { data, resultado, modal, setModal } = useQuotation()
     console.log(data)
 
+    const hiddenModal = () => {
+        
+        setTimeout(() => {
+            setModal(false)
+        }, 1000);
+    }
+
     return (
-        <div className='bg-gray-100 opacity-95'>
-            {/* <div className='absolute right-6 top-6 w-6 h-6'>
-                <img src={CloseBtn} alt="boton cerrar modal" />
-            </div> */}
+        <div className='opacity-95'>
+            <div className='absolute right-10 top-100 w-6 h-6 hover:cursor-pointer hover:w-[8%]'>
+                <img src={CloseBtn} alt="boton cerrar modal" onClick={hiddenModal}/>
+            </div>
             <h3 className='text-center py-2 text-2xl text-red-700'>Cotización</h3>
 
             <div className='border-b-2 mb-5'>

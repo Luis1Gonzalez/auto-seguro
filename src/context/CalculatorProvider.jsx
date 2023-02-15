@@ -25,6 +25,7 @@ const CalculatorProvider = ({ children }) => {
     const [modal, setModal] = useState(false)
     const [error, setError] = useState('')
     const [resultado, setResultado] = useState(0)
+    const [charging, setCharging] = useState(false)
 
     const handleChangeData = (e) => {
         setData({
@@ -66,9 +67,18 @@ console.log(basicPrice)
 //Calculando incremento por conductor menor de 25años
 basicPrice *= calculateMinor(data.minor)
 console.log(basicPrice)
-setResultado(basicPrice)
+
+
+setCharging(true)
+
+setTimeout(() => {
+    setResultado(basicPrice)
+    setCharging(false)
+},3000)
 
 }
+
+
 
 
 
