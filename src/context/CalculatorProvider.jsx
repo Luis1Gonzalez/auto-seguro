@@ -2,6 +2,7 @@ import { createContext, useState } from "react"
 import { yearDifference, calculateCoverage, calculateOrigin, calculateTime, calculateMinor } from '../helpers/index'
 import { cars } from '../data/options'
 
+
 const CalculatorContext = createContext()
 
 const CalculatorProvider = ({ children }) => {
@@ -22,6 +23,7 @@ const CalculatorProvider = ({ children }) => {
     })
 
     const [modal, setModal] = useState(false)
+    const [error, setError] = useState('')
 
     const handleChangeData = (e) => {
         setData({
@@ -76,7 +78,9 @@ console.log(data)
                 handleChangeData,
                 CalculatedInsurance,
                 modal,
-                setModal
+                setModal,
+                error,
+                setError,
             }}>
             {children}
         </CalculatorContext.Provider>

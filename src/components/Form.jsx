@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { brands, cars, years, type, timeContract, driverQuantity, countMinor } from '../data/options'
 import useQuotation from '../hooks/useQuotation'
+import Error from "../components/Error"
 
 export default function Form() {
 
-    const { data, handleChangeData, CalculatedInsurance, modal, setModal } = useQuotation()
+    const { data, handleChangeData, CalculatedInsurance, modal, setModal, error, setError } = useQuotation()
     const [filtering, setFiltering] = useState([])
 
     const filtered = data.brand
@@ -17,15 +18,18 @@ export default function Form() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (Object.values(data).includes('')) {
-            console.log('Todos los campos son obligatorios')
+            setError('Todos los campos son obligatorios')
             return
         }
         CalculatedInsurance()
         setModal(true)
+        setError('')
     }
 
     console.log(modal)
     return (
+        <>
+        {error && <Error />}
         <form onSubmit={handleSubmit}>
             <h3 className='text-center py-2 text-2xl text-red-700'>Formulario</h3>
 
@@ -133,5 +137,6 @@ export default function Form() {
             <input type="submit" className='w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold' value='cotizar' />
 
         </form>
+        </>
     )
 }
