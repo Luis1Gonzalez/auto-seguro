@@ -24,6 +24,7 @@ const CalculatorProvider = ({ children }) => {
 
     const [modal, setModal] = useState(false)
     const [error, setError] = useState('')
+    const [resultado, setResultado] = useState(0)
 
     const handleChangeData = (e) => {
         setData({
@@ -36,7 +37,7 @@ const CalculatorProvider = ({ children }) => {
 
 const CalculatedInsurance = () => {
 
-let basicPrice = 1000;
+let basicPrice = 500;
 console.log(basicPrice)
 
 //Obtener cuantos años tiene el carro
@@ -65,6 +66,7 @@ console.log(basicPrice)
 //Calculando incremento por conductor menor de 25años
 basicPrice *= calculateMinor(data.minor)
 console.log(basicPrice)
+setResultado(basicPrice)
 
 }
 
@@ -81,6 +83,7 @@ console.log(data)
                 setModal,
                 error,
                 setError,
+                resultado
             }}>
             {children}
         </CalculatorContext.Provider>

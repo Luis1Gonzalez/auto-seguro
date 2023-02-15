@@ -10,19 +10,19 @@ export function calculateCoverage(type) {
       increase = 1.2;
       break;
     case "Todo riesgo con franquicia 150":
-      increase = 1.16;
+      increase = 0.16;
       break;
     case "Todo riesgo con franquicia 300":
-      increase = 1.12;
+      increase = 0.12;
       break;
     case "Daños a terceros":
-      increase = 1.10;
+      increase = 0.10;
       break;
     case "Daños a terceros, lunas y ruedas":
-      increase = 1.08;
+      increase = 0.08;
       break;
     case "Responsabilidad civil":
-      increase = 1.06;
+      increase = 0.06;
       break;
     default:
       break;
@@ -54,13 +54,13 @@ export function calculateTime(time) {
 
   switch (time) {
     case "1":
-      increase = 0;
+      increase = 1.20;
       break;
     case "2":
       increase = 1.1;
       break;
     case "3":
-      increase = 1.20;
+      increase = 0;
       break;
     default:
       break;
@@ -76,12 +76,17 @@ export function calculateMinor(minor) {
     minorIs = 1.3;
     break;
     case "No":
-    minorIs = 0;
+    minorIs = 0.1;
     break;
     default:
       break;
   }
-  return minorIs;
-  
+  return minorIs;  
 }
 
+export function formatCurrency(result){
+  return result.toLocaleString("es-ES", {
+      style:"currency",
+      currency: "EUR",
+  });
+}

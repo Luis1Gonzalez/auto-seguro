@@ -1,9 +1,10 @@
 import useQuotation from '../hooks/useQuotation'
 import CloseBtn from '../assets/cerrar.svg'
+import { formatCurrency } from '../helpers'
 
 export default function Modal() {
 
-    const { data } = useQuotation()
+    const { data, resultado } = useQuotation()
     console.log(data)
 
     return (
@@ -48,8 +49,11 @@ export default function Modal() {
                 </div>
             </div>
 
-            <div className='border-b-2 mb-5'>
-
+            <div className='border-b-2 mb-5 text-center'>
+            <p className="my-2 text-md">
+                <span className="font-bold mx-2 text-gray-600 italic">Total Cotización:</span>
+                {formatCurrency(resultado)}
+            </p>
             </div>
 
         </div>
