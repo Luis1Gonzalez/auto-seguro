@@ -31,13 +31,13 @@ export default function Modal() {
 
                 {/* =================================== */}
 
-                <div className='flex flex-col sm:flex-row justify-center'>
+                <div className='flex flex-col sm:flex-row sm:justify-around'>
                     <div className='flex flex-col items-center pb-2 mb-5'>
                         <p className='text-center p-2 text-xl font-bold text-gray-700'>Datos del Vehiculo</p>
 
-                        <p className='text-black font-semibold uppercase'>Matricula: <span className='text-gray-600 font-semibold italic'>{data.matricula}</span></p>
+                        <p className='text-black font-semibold'>Matricula: <span className='text-gray-600 font-semibold italic uppercase'>{data.matricula}</span></p>
                         <p className='text-black font-semibold'>Marca: <span className='text-gray-600 font-semibold italic'>{data.brand}</span></p>
-                        <p className='text-black font-semibold'>Modelo: <span className='text-gray-600 font-semibold italic'>{data.model}</span></p>
+                        <p className='text-black font-semibold'>Modelo: <span className='text-gray-600 font-semibold italic uppercase'>{data.model}</span></p>
                         <p className='text-black font-semibold'>Año: <span className='text-gray-600 font-semibold italic'>{data.year}</span></p>
                     </div>
 

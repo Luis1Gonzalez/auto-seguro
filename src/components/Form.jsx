@@ -69,14 +69,13 @@ export default function Form() {
             </div>
 
             {/* =========================================================================== */}
+            <div className='sm:flex justify-around'>
             <div className='flex flex-col sm:flex-row'>
                 <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
                     <p className=' p-2'>Datos del Vehiculo</p>
 
-                    <div className='flex items-center'>
-                        <p className='w-1/3'>Matricula:</p>
-                        <input type="text" placeholder='XJR-215'  value={data.matricula} className='px-3 rounded-md bg-gray-200 w-1/3 text-center uppercase' name='matricula' onChange={e => handleChangeData(e)}/>
-                    </div>
+                        <input type="text"  placeholder='matricula'  value={data.matricula} className='px-3 rounded-md bg-gray-200 w-2/4 text-center uppercase' name='matricula' onChange={e => handleChangeData(e)}/>
+
                     <select className='px-3 rounded-md bg-gray-200 my-1 text-center' value={data.brand} name='brand' onChange={e => handleChangeData(e)}>
                         <option value="">-- Marca --</option>
 
@@ -133,7 +132,7 @@ export default function Form() {
                         ))}
 
                     </select>
-
+                    </div>
                 </div>
             </div>
             <input type="submit" className='w-full bg-indigo-500 hover:bg-indigo-600 transition-colors text-white cursor-pointer p-3 uppercase font-bold mb-8' value='cotizar' />
