@@ -39,35 +39,27 @@ const CalculatorProvider = ({ children }) => {
 const CalculatedInsurance = () => {
 
 let basicPrice = 500;
-console.log(basicPrice)
 
 //Obtener cuantos años tiene el carro
 const carAge = yearDifference(data.year)
-console.log(carAge);
 
 //Descuento de 3% por año
 basicPrice -= ((carAge * 3) * basicPrice) / 100
-console.log(basicPrice)
 
 //Calcular el impacto por origen 
 const origin = cars.filter(filt => filt.modelo === data.model)
 const determinateOrigen = (origin[0].origen) 
 
 basicPrice *= calculateOrigin(determinateOrigen)
-console.log(basicPrice)
 
 //Calcular el tipo de cobertura
 basicPrice *= calculateCoverage(data.type)
-console.log(basicPrice)
-
-//Calcular descuento por extencion del contrato
-basicPrice -= calculateTime(data.time)
-console.log(basicPrice)
 
 //Calculando incremento por conductor menor de 25años
 basicPrice *= calculateMinor(data.minor)
-console.log(basicPrice)
 
+//Calcular descuento por extencion del contrato
+basicPrice -= calculateTime(data.time)
 
 setCharging(true)
 
@@ -78,11 +70,6 @@ setTimeout(() => {
 
 }
 
-
-
-
-
-console.log(data)
     return (
         <CalculatorContext.Provider
             value={{

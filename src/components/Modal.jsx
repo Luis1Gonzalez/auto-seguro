@@ -5,7 +5,6 @@ import { formatCurrency } from '../helpers'
 export default function Modal() {
 
     const { data, resultado, modal, setModal } = useQuotation()
-    console.log(data)
 
     const hiddenModal = () => {
         
@@ -15,9 +14,9 @@ export default function Modal() {
     }
 
     return (
-        <div className='opacity-95'>
-            <div className='absolute right-10 top-100 w-6 h-6 hover:cursor-pointer hover:w-[8%]'>
-                <img src={CloseBtn} alt="boton cerrar modal" onClick={hiddenModal}/>
+        <div className='opacity-95 flex flex-col flex-wrap '>
+            <div className='flex justify-end'>
+                <img src={CloseBtn} alt="boton cerrar modal" onClick={hiddenModal} className='w-6 h-6 hover:cursor-pointer hover:w-[5%] hover:h-[5%]'/>
             </div>
             <h3 className='text-center py-2 text-2xl text-red-700'>Cotización</h3>
 
@@ -32,8 +31,8 @@ export default function Modal() {
 
                 {/* =================================== */}
 
-                <div className='flex flex-col sm:flex-row'>
-                    <div className='flex flex-col items-center pb-2 border-b-2 mb-5'>
+                <div className='flex flex-col sm:flex-row justify-center'>
+                    <div className='flex flex-col items-center pb-2 mb-5'>
                         <p className='text-center p-2 text-xl font-bold text-gray-700'>Datos del Vehiculo</p>
 
                         <p className='text-black font-semibold uppercase'>Matricula: <span className='text-gray-600 font-semibold italic'>{data.matricula}</span></p>

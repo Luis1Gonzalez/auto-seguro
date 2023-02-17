@@ -1,13 +1,11 @@
 import useQuotation from "../hooks/useQuotation"
 import Form from "./Form"
 import Modal from "./Modal"
-import Spinner from "./Spinner"
-
 
 export default function AutoSeguro() {
 
-const {modal, setModal, charging} = useQuotation()
-console.log(modal)
+const {modal} = useQuotation()
+
     return (
         <>
         <header className="my-10">
